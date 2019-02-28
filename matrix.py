@@ -13,7 +13,14 @@ def make_translate( x, y, z ):
     pass
 
 def make_scale( x, y, z ):
-    pass
+    scale = new_matrix()
+    scale[0][0] = x
+    scale[1][1] = y
+    scale[2][2] = z
+    scale[3][3] = 1
+    return scale
+
+
 
 def make_rotX( theta ):
     pass
