@@ -11,16 +11,31 @@ transform = new_matrix()
 
 parse_file( 'script', edges, transform, screen, color )
 
-m = new_matrix()
-s = make_scale(2, 1, 1)
-
-add_edge(m, 100, 100, 1, 200, 200, 1)
-add_edge(m, 200, 200, 1, 300, 100, 1)
-add_edge(m, 300, 100, 1, 100, 100, 1)
-
-draw_lines( m, screen, color )
-matrix_mult( s, m )
-draw_lines( m, screen, red )
-display(screen)
+# ===================== testing ========================
+#m = []
+#add_edge(m, 100, 100, 1, 100, 200, 1)
+#add_edge(m, 100, 200, 1, 200, 200, 1)
+#add_edge(m, 200, 200, 1, 200, 100, 1)
+#add_edge(m, 200, 100, 1, 100, 100, 1)
+#print_matrix(m)
+#
+#center = make_translate(250, 250, 0)
+##a = make_translate(120, 0, 0)
+#a = make_rotZ(45)
+##print_matrix(a)
+#
+#draw_lines( m, screen, color )
+#
+#matrix_mult( a, m )
+#for i in range(len(m)):
+#    temp = m[i]
+#    temp = [int(x) for x in temp]
+#    m[i] = temp
+#
+#matrix_mult(center, m)
+#
+#print_matrix(m)
+#draw_lines( m, screen, red )
+#display(screen)
 
 

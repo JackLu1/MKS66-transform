@@ -33,4 +33,74 @@ The file follows the following format:
 See the file script for an example of the file format
 """
 def parse_file( fname, points, transform, screen, color ):
-    pass
+
+    # setup cmds
+    f = open(fname, 'r')
+    
+    line = f.readline().rstrip('\n')
+    count = 0
+
+    while line:
+        print line
+        if line == 'line':
+            args = f.readline().rstrip('\n').split()
+            args = [int(x) for x in args]
+            add_edge(points, args[0], args[1], args[2], args[3], args[4], args[5])
+
+            print line
+
+        if line == 'ident':
+            ident(transform)
+
+        if line == 'scale':
+            args = f.readline().rstrip('\n').split()
+            args = [int(x) for x in args]
+            s = make_scale( args[0], args[1], args[2])
+            matrix_mult(s, transform)
+            print line
+
+        if line == 'translate' or line == 'move':
+            args = f.readline().rstrip('\n').split()
+            args = [int(x) for x in args]
+            t = make_translate( args[0], args[1], args[2])
+            matrix_mult(t, transform)
+            print line
+
+        if line == 'rotate':
+            args = f.readline().rstrip('\n').split()
+            if args[0] == 'x':
+                r = make_rotX( int(args[1]) )
+            if args[0] == 'y':
+                r = make_rotY( int(args[1]) )
+            if args[0] == 'z':
+                r = make_rotZ( int(args[1]) )
+            matrix_mult(r, transform)
+            
+            print line
+
+        if line == 'apply':
+            matrix_mult(transform, points)
+            for row in range( len(points) ):
+                for col in range( len(points[0]) ):
+                    points[row][col] = int(points[row][col])
+
+
+        if line == 'display':
+            clear_screen(screen)
+            draw_lines(points, screen, color)
+            display(screen)
+
+        if line == 'save':
+            args = f.readline().rstrip('\n').split()
+            clear_screen(screen)
+            draw_lines(points, screen, color)
+            save_extension(screen, args[0])
+
+        if line == 'quit':
+            break
+
+        # incremet
+        line = f.readline().rstrip('\n') 
+
+    print_matrix(points)
+

@@ -9,27 +9,60 @@ z0  z1  ... zn
 """
 import math
 
+def make_int( matrix ):
+    for r in range( len( matrix[0] ) ):
+        for c in range( len(matrix) ):
+            matrix[c][r] = int(matrix[c][r])
+
 def make_translate( x, y, z ):
-    pass
+    t = [
+        [1, 0, 0, 0],
+        [0, 1, 0, 0],
+        [0, 0, 1, 0],
+        [x, y, z, 1]
+        ]
+    return t
 
 def make_scale( x, y, z ):
-    scale = new_matrix()
-    scale[0][0] = x
-    scale[1][1] = y
-    scale[2][2] = z
-    scale[3][3] = 1
-    return scale
+    t = [
+        [x, 0, 0, 0],
+        [0, y, 0, 0],
+        [0, 0, z, 0],
+        [0, 0, 0, 1]
+            ]
+    return t
 
 
 
 def make_rotX( theta ):
-    pass
+    radian = math.radians(theta)
+    r = [
+        [1, 0, 0, 0],
+        [0, math.cos(radian), math.sin(radian), 0],
+        [0, -1 * math.sin(radian), math.cos(radian), 0],
+        [0, 0, 0, 1]
+            ]
+    return r
 
 def make_rotY( theta ):
-    pass
+    radian = math.radians(theta)
+    r = [
+        [math.cos(radian), 0, -1 * math.sin(radian), 0],
+        [0, 1, 0, 0],
+        [math.sin(radian), 0, math.cos(radian), 0],
+        [0, 0, 0, 1]
+            ]
+    return r
 
 def make_rotZ( theta ):
-    pass
+    radian = math.radians(theta)
+    r = [
+        [math.cos(radian), math.sin(radian), 0, 0],
+        [-1 * math.sin(radian), math.cos(radian), 0, 0],
+        [0, 0, 1, 0],
+        [0, 0, 0, 1]
+            ]
+    return r
 
 #print the matrix such that it looks like
 #the template in the top comment
